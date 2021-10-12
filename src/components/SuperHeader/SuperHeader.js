@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components/macro';
 
 import { COLORS } from '../../constants';
@@ -6,8 +6,14 @@ import { COLORS } from '../../constants';
 import SearchInput from '../SearchInput';
 import UnstyledButton from '../UnstyledButton';
 import Icon from '../Icon';
+import {ThemeContext} from 'styled-components';
+
 
 const SuperHeader = () => {
+
+  const theme = useContext(ThemeContext);
+  console.log(theme);
+
   return (
     <Wrapper>
       <MarketingMessage>
@@ -32,6 +38,12 @@ const Wrapper = styled.div`
   height: 40px;
   padding-left: 32px;
   padding-right: 32px;
+
+  @media ${props=>props.theme.queries.tablet} {
+    
+    display:none;
+
+  }
 `;
 
 const MarketingMessage = styled.span`

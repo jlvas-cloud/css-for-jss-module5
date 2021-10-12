@@ -15,14 +15,17 @@ const ShoeIndex = ({ sortId, setSortId }) => {
       <MainColumn>
         <Header>
           <Title>Running</Title>
-          <Select
-            label="Sort"
-            value={sortId}
-            onChange={(ev) => setSortId(ev.target.value)}
-          >
-            <option value="newest">Newest Releases</option>
-            <option value="price">Price</option>
-          </Select>
+          
+          <HidePhone>
+            <Select
+              label="Sort"
+              value={sortId}
+              onChange={(ev) => setSortId(ev.target.value)}
+            >
+              <option value="newest">Newest Releases</option>
+              <option value="price">Price</option>
+            </Select>
+          </HidePhone>
         </Header>
         <Spacer size={32} />
         <ShoeGrid />
@@ -35,7 +38,9 @@ const ShoeIndex = ({ sortId, setSortId }) => {
             Shoes
           </Breadcrumbs.Crumb>
         </Breadcrumbs>
-        <Spacer size={42} />
+        <HideTablet>
+          <Spacer size={42} />
+        </HideTablet>
         <ShoeSidebar />
       </LeftColumn>
     </Wrapper>
@@ -47,10 +52,20 @@ const Wrapper = styled.div`
   flex-direction: row-reverse;
   align-items: baseline;
   gap: 32px;
+
+  @media ${p=>p.theme.queries.tablet}{
+    flex-direction: column-reverse;
+    height:0%;
+    gap:2px;
+  }
 `;
 
 const LeftColumn = styled.div`
   flex-basis: 248px;
+  
+  @media ${p=>p.theme.queries.tablet}{
+    flex-basis:0px;
+  }
 `;
 
 const MainColumn = styled.div`
@@ -61,11 +76,31 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+
+  @media ${p=>p.theme.queries.tablet}{
+    align-items: flex-end;
+  } 
 `;
 
 const Title = styled.h2`
   font-size: 1.5rem;
   font-weight: ${WEIGHTS.medium};
 `;
+
+const HideTablet= styled.div`
+  
+  @media ${p=>p.theme.queries.tablet}{
+    display:none;
+  }
+  
+`
+
+const HidePhone= styled.div`
+  
+  @media ${p=>p.theme.queries.phone}{
+    display:none;
+  }
+ 
+`
 
 export default ShoeIndex;
